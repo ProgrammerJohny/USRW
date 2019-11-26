@@ -6,7 +6,7 @@ session_start();
 
 if(empty($_SESSION["zalogowany"]))$_SESSION["zalogowany"]=0;
 
-mysql_connect("localhost", "root", "")or die("Nie można nawiązać połączenia z bazą");
+mysql_connect("localhost", "usrw", "")or die("Nie można nawiązać połączenia z bazą");
 mysql_select_db("USRW")or die("Wystąpił błąd podczas wybierania bazy danych");
 
 function ShowLogin($komunikat=""){
@@ -82,14 +82,14 @@ else{
     <div class="card">
       <div class="card-body">
 
-        <p class="card-text" onclick="openOM()">OPIEKA MEDYCZNA</p>
+        <p class="card-text" onclick="openOM();">OPIEKA MEDYCZNA</p>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <p class="card-text" onclick="openMP()">MEDYCYNA PRACY</p>
+        <p class="card-text" onclick="openMP();">MEDYCYNA PRACY</p>
       </div>
     </div>
   </div>

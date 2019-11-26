@@ -1,6 +1,6 @@
-openMP() {
+function openMP() {
   window.open("APPOINTMENT/MP/view.php","_blank");
 }
-openOM() {
+function openOM() {
   window.open("APPOINTMENT/OM/view.php","_blank");
 }
