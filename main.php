@@ -76,60 +76,24 @@ else{
 <hr>
 
 <div class="jumbotron">
-	<div class="card text-center">
-		UMÓW WIZYTĘ
-  <div class="card-body" onclick="newAppointmentPOM()">
-    <h5 class="card-title">PRYWATNA OPIEKA MEDYCZNA</h5>
+
+	<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+
+        <p class="card-text" onclick="openOM()">OPIEKA MEDYCZNA</p>
+      </div>
+    </div>
   </div>
-
-</div>
-
-<div class="card text-center">
-
-<div class="card-body" onclick="newAppointmentMP()">
-	<h5 class="card-title">MEDYCYNA PRACY</h5>
-</div>
-
-</div>
-
-<div class="card text-center">
-
-<div class="card-body" onclick="newAppointmentNFZ()">
-	<h5 class="card-title">NFZ</h5>
-
-</div>
-
-</div>
-
-</div>
-<!-- SEKCJA WYSZUKAJ WIZYTĘ -->
-
-<div class="jumbotron">
-	<div class="card text-center">
-		WYSZUKAJ WIZYTĘ
-  <div class="card-body" onclick="searchAppointmentPOM()">
-    <h5 class="card-title">PRYWATNA OPIEKA MEDYCZNA</h5>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text" onclick="openMP()">MEDYCYNA PRACY</p>
+      </div>
+    </div>
   </div>
-
 </div>
-
-<div class="card text-center">
-
-<div class="card-body" onclick="searchAppointmentMP()">
-	<h5 class="card-title">MEDYCYNA PRACY</h5>
-</div>
-
-</div>
-
-<div class="card text-center">
-
-<div class="card-body" onclick="searchAppointmentNFZ()">
-	<h5 class="card-title">NFZ</h5>
-
-</div>
-
-</div>
-
 </div>
 <?php
 }
