@@ -71,7 +71,7 @@ if($_SESSION["zalogowany"]!=1){
 }
 else{
 ?>
-<a href='main.php?wyloguj=tak' class="btn btn-outline-danger" role="alert">Wyloguj się</a>
+<a href='main.php?wyloguj=tak' class="btn btn-sm btn-outline-danger" role="alert">Wyloguj się</a>
 
 <hr>
 

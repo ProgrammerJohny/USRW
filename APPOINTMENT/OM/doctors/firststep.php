@@ -11,7 +11,7 @@ mysql_select_db("USRW")or die("Wystąpił błąd podczas wybierania bazy danych"
 
 function ShowLogin($komunikat=""){
 	echo "$komunikat<br>";
-	echo "<form action='../../main.php' method=post>";
+	echo "<form action='../../../main.php' method=post>";
     echo "<div class='jumbotron' >";
 		echo "<p class='text-center'>USRW - Ujednolicony System Rezerwacji Wizyt</p></hr>";
 	echo "<label class='badge badge-primary' for='login'>Login </label>
@@ -47,14 +47,13 @@ transition-duration: 1s;
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<title>USRW - OPIEKA MEDYCZNA</title>
+	<title>USRW - Ujednolicony System Rezerwacji Wizyt</title>
   <meta charset="utf-8"/>
-  <script src="../../scripts/js/main.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script src="../../../scripts/js/main.js" async></script>
 </head>
 <body>
 	<?
-	include('../../scripts/db/connect.php');
+	include('../../../scripts/db/connect.php');
 
 	?>
 <?php
@@ -71,15 +70,67 @@ if($_SESSION["zalogowany"]!=1){
 }
 else{
 ?>
-<a href='../../main.php?wyloguj=tak' class="btn btn-sm btn-outline-danger" role="alert">Wyloguj się</a>
-
+<a href='main.php?wyloguj=tak' class="btn btn-sm btn-outline-danger" role="alert">Wyloguj się</a>
+<button class="btn btn-sm btn-outline-warning" onclick="window.close()">Powrót o jedną stronę</button>
+<button class="btn btn-sm btn-outline-dark" onclick="deepreturn()">Powrót do ekranu głównego</button>
 <hr>
-
 <div class="jumbotron">
+<h2>Umów wizytę do specjalisty</h2>
+<form action="secondstep.php" method="post">
+<table class="table table-bordered">
+<tr>
 
-<button class="btn btn-outline-dark btn-lg btn-block" onclick="doctors()" >Specjalista</button>
-<button class="btn btn-outline-dark btn-lg btn-block" onlick="labs">Badania</button>
-<button class="btn btn-outline-dark btn-lg btn-block" onclick="rehabilitation">Rehabilitacja</button>
+  <td><label class="form control badge badge-dark">Wpisz numer PESEL</label><input type="text" placeholder="PESEL" name="pesel" class="form-control"></td>
+</tr>
+<tr>
+  <td><p class="text-muted">Jeżeli PESEL znajduje się w bazie, dane Pacjenta będą widoczne poniżej</p></td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td><div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Imię" id="fname">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Nazwisko" id="lname">
+    </div>
+  </div></td>
+  <td>  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Telefon" id="tel">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Email" id="mail">
+    </div>
+  </div>
+</td>
+<td>  <div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="compliance(this);">
+    <label class="custom-control-label" for="customSwitch1">Zgodność danych</label>
+  </div>
+</td>
+<tr>
+
+<td>  <div class="form-group">
+    <label for="exampleFormControlSelect1">Wybierz specjalizację</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+    <option>...</option>
+    <?
+    $list = $conn->query("SELECT * FROM services WHERE type_services = 'Konsultacja'");
+while($l = $list->fetch()) {
+  echo "<option>".$l['name_services']."</option>";
+}
+    ?>
+    </select>
+  </div>
+</td>
+<td>
+<button class="btn btn-lg btn-group btn-outline-success">&rArr;Przejdź do wyboru lekarza&rArr;</button>
+</td>
+</tr>
+
+</table>
+</form>
 </div>
 <?php
 }
