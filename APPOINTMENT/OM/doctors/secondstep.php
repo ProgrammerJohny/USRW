@@ -40,6 +40,9 @@ transition-duration: 1s;
 
 	cursor : pointer;
 }
+span.right {
+	float: right;
+}
 
 	</style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,64 +74,37 @@ if($_SESSION["zalogowany"]!=1){
 else{
 ?>
 <a href='main.php?wyloguj=tak' class="btn btn-sm btn-outline-danger" role="alert">Wyloguj się</a>
-<button class="btn btn-sm btn-outline-warning" onclick="window.close()">Powrót o jedną stronę</button>
+<button class="btn btn-sm btn-outline-warning" onclick="window.history.back()">Powrót o jedną stronę</button>
 <button class="btn btn-sm btn-outline-dark" onclick="deepreturn()">Powrót do ekranu głównego</button>
 <hr>
 <div class="jumbotron">
 <h2>Umów wizytę do specjalisty</h2>
 <div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">50%</div>
 </div>
-<form action="secondstep.php" method="post">
-<table class="table table-bordered">
-<tr>
-
-  <td><label class="form control badge badge-dark">Wpisz numer PESEL</label><input type="text" placeholder="PESEL" name="pesel" class="form-control"></td>
-</tr>
-<tr>
-  <td><p class="text-muted">Jeżeli PESEL znajduje się w bazie, dane Pacjenta będą widoczne poniżej</p></td>
-  <td>&nbsp;</td>
-</tr>
-<tr>
-  <td><div class="row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Imię"  name="fname">
-    </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Nazwisko"  name="lname">
-    </div>
-  </div></td>
-  <td>  <div class="row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Telefon"  name="tel">
-    </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Email"  name="mail">
-    </div>
-  </div>
-</td>
-
-<tr>
-
-<td>  <div class="form-group">
-    <label for="exampleFormControlSelect1">Wybierz specjalizację</label>
+<form action="thirdstep.php" method="post">
+<ul class="list-group">
+  <li class="list-group-item">Imię <span class="right"><? echo $_POST['fname']?></span></li>
+  <li class="list-group-item">Nazwisko <span class="right"><? echo $_POST['lname']?></span></li>
+  <li class="list-group-item">PESEL <span class="right"><?echo $_POST['pesel']?></span></li>
+  <li class="list-group-item">Numer telefonu <span class="right"><?echo $_POST['tel']?></span></li>
+  <li class="list-group-item">Adres e-mail<span class="right"><?echo $_POST['mail']?></span></li>
+	<li class="list-group-item">Specjalizacja<span class="right"><?echo $_POST['majorArray']?></li>
+</ul>
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Wybierz lekarza</label>
     <select class="form-control" name="majorArray" id="exampleFormControlSelect1">
     <option>...</option>
     <?
-    $list = $conn->query("SELECT * FROM services WHERE type_services = 'Konsultacja'");
-while($l = $list->fetch()) {
-  echo "<option name='fullname'> ".$l['name_services']."</option>";
-}
+			$list = $conn->query("SELECT * FROM doctors WHERE major = '{$_POST[majorArray]}'");
+	while($l = $list->fetch()) {
+		echo "<option name='fullname'>".$l['fullname_doctors']."</option>";
+
+		}
+
     ?>
     </select>
   </div>
-</td>
-<td>
-<button class="btn btn-lg btn-group btn-outline-success">&rArr;Przejdź do wyboru lekarza&rArr;</button>
-</td>
-</tr>
-
-</table>
 </form>
 </div>
 <?php
