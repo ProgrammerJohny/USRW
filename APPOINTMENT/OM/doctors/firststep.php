@@ -79,7 +79,7 @@ else{
 <tr>
   <td><div class="row">
     <div class="col">
-      <input type="text" class="form-control" placeholder="Imię"  name="fname">
+      <input type="text" class="form-control" placeholder="Wpisz imię Pacjenta"  name="fname">
     </div>
     <div class="col">
       <input type="text" class="form-control" placeholder="Nazwisko"  name="lname">
@@ -104,12 +104,13 @@ else{
     <?
     $list = $conn->query("SELECT * FROM services WHERE type_services = 'Konsultacja'");
 while($l = $list->fetch()) {
-  echo "<option name='fullname'> ".$l['name_services']."</option>";
+  echo "<option name='servicename'> ".$l['name_services']."</option>";
 }
     ?>
     </select>
   </div>
 </td>
+
 <td>
 <button class="btn btn-lg btn-group btn-outline-success">&rArr;Przejdź do wyboru lekarza&rArr;</button>
 </td>
